@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#10243A">
+    <meta name="description" content="Grafik hasil praktikum Virtual Lab Elastisitas">
+
+    <title>Grafik | Virtual Lab Elastisitas</title>
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/auth.js"></script>
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">⚛</div>
+            <div>
+                <h2>VIRTUAL LAB</h2>
+                <p>ELASTISITAS</p>
+            </div>
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="index.html" class="menu-item">
+                <span>▦</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="materi.html" class="menu-item">
+                <span>📖</span>
+                <span>Materi Pembelajaran</span>
+            </a>
+
+            <a href="simulasi.html" class="menu-item">
+                <span>⚗</span>
+                <span>Virtual Laboratory</span>
+            </a>
+
+            <a href="pengamatan.html" class="menu-item">
+                <span>▤</span>
+                <span>Data Pengamatan</span>
+            </a>
+
+            <a href="grafik.html" class="menu-item active">
+                <span>▥</span>
+                <span>Grafik</span>
+            </a>
+
+            <a href="lkpd.html" class="menu-item">
+                <span>📝</span>
+                <span>LKPD Digital</span>
+            </a>
+
+            <a href="evaluasi.html" class="menu-item">
+                <span>✓</span>
+                <span>Evaluasi</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <p>Virtual Lab Elastisitas</p>
+            <small>Media Pembelajaran Fisika</small>
+        </div>
+
+    </aside>
+
+
+    <!-- KONTEN UTAMA -->
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <button class="menu-toggle" id="menuToggle">
+                ☰
+            </button>
+
+            <div class="breadcrumb">
+                Dashboard / Grafik
+            </div>
+
+            <div class="profile">
+                <div class="profile-avatar">S</div>
+                <span>Virtual Lab</span>
+            </div>
+
+        </header>
+
+
+        <section class="page-content">
+
+            <div class="page-header">
+
+                <h1>Grafik Hasil Pengamatan</h1>
+
+                <p>
+                    Analisis hubungan antara gaya dan pertambahan panjang
+                    berdasarkan data hasil percobaan elastisitas.
+                </p>
+
+            </div>
+
+
+            <!-- RINGKASAN DATA -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <p>Jumlah Percobaan</p>
+                    <h2 id="totalExperiments">0</h2>
+                    <span>Data tersimpan</span>
+                </div>
+
+                <div class="stat-card">
+                    <p>Gaya Maksimum</p>
+                    <h2 id="maximumForce">0 N</h2>
+                    <span>Hasil pengamatan</span>
+                </div>
+
+                <div class="stat-card">
+                    <p>Pertambahan Panjang Maksimum</p>
+                    <h2 id="maximumExtension">0 mm</h2>
+                    <span>Hasil pengamatan</span>
+                </div>
+
+            </div>
+
+
+            <!-- FILTER GRAFIK -->
+            <div class="page-panel">
+
+                <div class="panel-heading">
+                    <h2>Pengaturan Grafik</h2>
+                    <p>Pilih bahan yang ingin dianalisis.</p>
+                </div>
+
+                <div class="filter-group">
+
+                    <label for="materialFilter">
+                        Pilih Material
+                    </label>
+
+                    <select id="materialFilter">
+                        <option value="all">Semua Material</option>
+                    </select>
+
+                </div>
+
+                <div class="chart-description">
+                    Sumbu X: Pertambahan Panjang (mm)
+                    <br>
+                    Sumbu Y: Gaya (N)
+                </div>
+
+            </div>
+
+
+            <!-- GRAFIK -->
+            <div class="page-panel">
+
+                <div class="panel-heading">
+                    <h2>Grafik Gaya terhadap Pertambahan Panjang</h2>
+                    <p>
+                        Grafik dibuat berdasarkan data percobaan yang tersimpan.
+                    </p>
+                </div>
+
+                <div class="chart-wrapper">
+                    <canvas id="elasticityChart"></canvas>
+                </div>
+
+                <p id="emptyChart" class="empty-data">
+                    Belum ada data untuk ditampilkan.
+                    Silakan lakukan percobaan terlebih dahulu.
+                </p>
+
+            </div>
+
+
+            <!-- ANALISIS -->
+            <div class="page-panel">
+
+                <div class="panel-heading">
+                    <h2>Analisis Grafik</h2>
+                    <p>Informasi hasil pengolahan data pengamatan.</p>
+                </div>
+
+                <div class="analysis-grid">
+
+                    <div class="analysis-item">
+                        <span>Persamaan garis tren</span>
+                        <h3 id="trendEquation">Belum tersedia</h3>
+                    </div>
+
+                    <div class="analysis-item">
+                        <span>Konstanta kekakuan (k)</span>
+                        <h3 id="springConstant">-</h3>
+                    </div>
+
+                    <div class="analysis-item">
+                        <span>Jumlah data dianalisis</span>
+                        <h3 id="analyzedCount">0</h3>
+                    </div>
+
+                </div>
+
+                <div class="analysis-note" id="analysisNote">
+                    Analisis akan muncul setelah data pengamatan tersedia.
+                </div>
+
+            </div>
+
+
+            <!-- TOMBOL -->
+            <div class="action-buttons">
+
+                <button class="primary-button" id="downloadChart">
+                    Unduh Grafik
+                </button>
+
+                <button class="secondary-button" id="refreshChart">
+                    Perbarui Grafik
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="js/app.js"></script>
+<script src="js/grafik.js"></script>
+
+</body>
+</html>

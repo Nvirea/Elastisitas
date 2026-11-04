@@ -1,0 +1,2033 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #F3F6FA;
+    color: #20334A;
+}
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 255px;
+    background: #10243A;
+    color: white;
+    padding: 25px 17px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 5px 10px 35px;
+}
+
+.brand-icon {
+    width: 43px;
+    height: 43px;
+    background: #1E4056;
+    color: #47D7C2;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    font-size: 27px;
+}
+
+.brand h2 {
+    font-size: 17px;
+    letter-spacing: 1px;
+}
+
+.brand small {
+    font-size: 11px;
+    color: #47D7C2;
+    letter-spacing: 2px;
+}
+
+.menu-heading {
+    color: #8297AA;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    color: #C3D0DD;
+    text-decoration: none;
+    padding: 13px;
+    border-radius: 9px;
+    font-size: 13px;
+}
+
+.menu-item:hover,
+.menu-item.active {
+    background: #1D4058;
+    color: #47D7C2;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding: 25px 10px 5px;
+    color: #A9BACB;
+    font-size: 11px;
+    line-height: 2;
+}
+
+/* MAIN */
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.topbar {
+    height: 75px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 35px;
+    border-bottom: 1px solid #E8EDF2;
+}
+
+.breadcrumb {
+    font-size: 13px;
+    color: #8795A5;
+}
+
+.breadcrumb strong {
+    color: #20334A;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-avatar {
+    width: 39px;
+    height: 39px;
+    background: #DFF7F2;
+    color: #168E7D;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+.profile strong,
+.profile small {
+    display: block;
+}
+
+.profile strong {
+    font-size: 12px;
+}
+
+.profile small {
+    color: #8795A5;
+    font-size: 10px;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 23px;
+    cursor: pointer;
+}
+
+/* CONTENT */
+
+.page-content {
+    max-width: 1500px;
+    margin: auto;
+    padding: 35px;
+}
+
+/* HERO */
+
+.hero {
+    background: linear-gradient(120deg, #10243A, #1E536A);
+    border-radius: 17px;
+    padding: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    color: white;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero-label {
+    color: #47D7C2;
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.hero h1 {
+    font-size: clamp(27px, 3vw, 38px);
+    line-height: 1.3;
+    margin: 17px 0;
+}
+
+.hero h1 span {
+    color: #47D7C2;
+}
+
+.hero p {
+    color: #D1DCE6;
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.hero-visual {
+    width: 245px;
+    min-height: 180px;
+    background: rgba(255,255,255,0.09);
+    border: 1px solid rgba(255,255,255,0.17);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.physics-symbol {
+    font-size: 80px;
+    color: #47D7C2;
+}
+
+.hero-visual h3 {
+    letter-spacing: 3px;
+}
+
+.hero-visual p {
+    margin: 5px;
+    font-size: 10px;
+}
+
+/* BUTTON */
+
+.primary-button {
+    display: inline-block;
+    background: #47D7C2;
+    color: #10243A;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-weight: bold;
+    font-size: 13px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.primary-button:hover {
+    background: #2DC0AA;
+}
+
+/* SECTION */
+
+.content-section {
+    margin-top: 40px;
+    scroll-margin-top: 25px;
+}
+
+.section-heading {
+    margin-bottom: 20px;
+}
+
+.section-heading h2 {
+    font-size: 21px;
+}
+
+.section-heading p {
+    color: #8795A5;
+    font-size: 12px;
+    margin-top: 6px;
+}
+
+/* STATS */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 17px;
+}
+
+.stat-card {
+    background: white;
+    border: 1px solid #E9EEF3;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 11px;
+    background: #E6F6F4;
+    font-size: 23px;
+}
+
+.stat-card small {
+    color: #8493A4;
+}
+
+.stat-card h3 {
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+/* MATERIAL */
+
+.material-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 17px;
+}
+
+.material-card {
+    background: white;
+    border: 1px solid #E9EEF3;
+    border-radius: 13px;
+    padding: 23px 19px;
+    transition: 0.3s;
+}
+
+.material-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(20,40,60,0.08);
+}
+
+.material-icon {
+    width: 48px;
+    height: 48px;
+    background: #E6F6F4;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    font-size: 24px;
+    margin-bottom: 17px;
+}
+
+.material-card h3 {
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.material-card p {
+    color: #8291A1;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* LABORATORY */
+
+.lab-card {
+    background: #E2F4F2;
+    border: 1px solid #CCE9E5;
+    border-radius: 14px;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.lab-card span {
+    font-size: 10px;
+    color: #168E7D;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.lab-card h2 {
+    font-size: 21px;
+    margin: 12px 0;
+}
+
+.lab-card p {
+    color: #687F8B;
+    font-size: 13px;
+    margin-bottom: 18px;
+}
+
+.lab-icon {
+    font-size: 80px;
+}
+
+/* PLACEHOLDER */
+
+.content-placeholder {
+    background: white;
+    border: 1px solid #E9EEF3;
+    border-radius: 13px;
+    padding: 30px;
+}
+
+.content-placeholder h2 {
+    font-size: 19px;
+    margin-bottom: 10px;
+}
+
+.content-placeholder p {
+    color: #8795A5;
+    font-size: 13px;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 40px 10px 10px;
+    color: #8190A0;
+    font-size: 12px;
+    line-height: 2;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1100px) {
+    .material-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 850px) {
+
+    .sidebar {
+        position: fixed;
+        left: -270px;
+        top: 0;
+        bottom: 0;
+        z-index: 100;
+        transition: 0.3s;
+        overflow-y: auto;
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .topbar {
+        padding: 0 18px;
+        gap: 10px;
+    }
+
+    .page-content {
+        padding: 22px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .hero {
+        padding: 27px 22px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hero-visual {
+        width: 100%;
+    }
+
+    .stats-grid,
+    .material-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .lab-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .lab-icon {
+        align-self: center;
+    }
+
+    .page-content {
+        padding: 15px;
+    }
+
+    .profile strong {
+        font-size: 10px;
+    }
+
+    .profile small {
+        font-size: 9px;
+    }
+}
+
+/* =========================================
+   PENYEMPURNAAN VIRTUAL LAB: ELASTISITAS
+========================================= */
+
+/* Mencegah halaman melebar karena elemen */
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+/* Transisi halus pada tombol */
+button,
+a {
+    transition: all 0.2s ease;
+}
+
+/* Mencegah konten dashboard keluar layar */
+.app-container {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* Gambar dan canvas responsif */
+img,
+canvas {
+    max-width: 100%;
+}
+
+/* Tabel dapat digulir pada layar kecil */
+.table-wrapper {
+    max-width: 100%;
+}
+
+/* Penyesuaian layar laptop */
+@media (min-width: 1200px) {
+    .page-content {
+        max-width: 1700px;
+    }
+}
+
+/* Penyesuaian layar HP */
+@media (max-width: 600px) {
+    .topbar {
+        height: 65px;
+    }
+
+    .breadcrumb {
+        font-size: 11px;
+    }
+
+    .simulation-page {
+        padding: 15px;
+    }
+}
+
+/* =========================================
+   PENYESUAIAN KARTU NAVIGASI DASHBOARD
+========================================= */
+
+/* Kartu fitur yang berupa tautan */
+a.material-card {
+    display: block;
+    color: #20334A;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Warna teks tetap konsisten */
+a.material-card h3 {
+    color: #20334A;
+}
+
+a.material-card p {
+    color: #8291A1;
+}
+
+/* Efek ketika kartu diarahkan kursor */
+a.material-card:hover {
+    color: #20334A;
+    border-color: #47D7C2;
+}
+
+/* =========================================
+   PENYESUAIAN HALAMAN TERPISAH
+========================================= */
+
+.page-content {
+    width: 100%;
+    min-width: 0;
+}
+
+/* Area konten halaman selain dashboard */
+.page-header {
+    margin-bottom: 28px;
+}
+
+.page-header h1 {
+    font-size: 26px;
+    color: #20334A;
+    margin-bottom: 8px;
+}
+
+.page-header p {
+    color: #8795A5;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* Panel konten */
+.page-panel {
+    background: white;
+    border: 1px solid #E9EEF3;
+    border-radius: 13px;
+    padding: 25px;
+    margin-bottom: 22px;
+}
+
+@media (max-width: 600px) {
+    .page-panel {
+        padding: 17px;
+    }
+
+    .page-header h1 {
+        font-size: 22px;
+    }
+}
+
+/* =================================================
+   GRAFIK VIRTUAL LAB ELASTISITAS
+================================================= */
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    max-width: 350px;
+    margin-top: 20px;
+}
+
+.filter-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #435c75;
+}
+
+.filter-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dce5ed;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #20334a;
+    outline: none;
+}
+
+.chart-description {
+    margin-top: 20px;
+    color: #718096;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.chart-wrapper {
+    position: relative;
+    width: 100%;
+    height: 390px;
+    margin-top: 25px;
+}
+
+.analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.analysis-item {
+    padding: 20px;
+    background: #f5f8fb;
+    border-radius: 10px;
+    min-width: 0;
+}
+
+.analysis-item span {
+    display: block;
+    color: #8291a1;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.analysis-item h3 {
+    color: #20334a;
+    font-size: 17px;
+    overflow-wrap: anywhere;
+}
+
+.analysis-note {
+    margin-top: 20px;
+    padding: 15px;
+    background: #eef8f7;
+    border-radius: 8px;
+    color: #347e75;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.primary-button,
+.secondary-button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.primary-button {
+    background: #16b8a6;
+    color: white;
+}
+
+.secondary-button {
+    background: #e8eef4;
+    color: #20334a;
+}
+
+.empty-data {
+    text-align: center;
+    padding: 30px 15px;
+    color: #8291a1;
+    font-size: 13px;
+}
+
+@media (max-width: 700px) {
+
+    .analysis-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-wrapper {
+        height: 300px;
+    }
+
+    .action-buttons button {
+        width: 100%;
+    }
+
+}
+
+/* =================================================
+   REDESAIN HALAMAN GRAFIK
+================================================= */
+
+.page-header {
+    margin-bottom: 28px;
+}
+
+.page-header h1 {
+    font-size: 27px;
+    font-weight: 700;
+    color: #20334a;
+    margin-bottom: 9px;
+}
+
+.page-header p {
+    font-size: 13px;
+    color: #8291a1;
+    line-height: 1.7;
+}
+
+/* Ringkasan data */
+
+.page-content .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.page-content .stat-card {
+    background: #ffffff;
+    border: 1px solid #e5ebf1;
+    border-radius: 13px;
+    padding: 22px;
+    min-width: 0;
+}
+
+.page-content .stat-card p {
+    color: #8291a1;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.page-content .stat-card h2 {
+    color: #20334a;
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.page-content .stat-card span {
+    color: #9aa8b6;
+    font-size: 11px;
+}
+
+/* Panel */
+
+.page-content .page-panel {
+    background: #ffffff;
+    border: 1px solid #e5ebf1;
+    border-radius: 14px;
+    padding: 25px;
+    margin-bottom: 22px;
+}
+
+.panel-heading {
+    margin-bottom: 20px;
+}
+
+.panel-heading h2 {
+    color: #20334a;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.panel-heading p {
+    color: #8795a5;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* Filter */
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    max-width: 320px;
+    margin-top: 15px;
+}
+
+.filter-group label {
+    color: #435c75;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.filter-group select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #dce5ed;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #20334a;
+    font-size: 13px;
+    outline: none;
+}
+
+.filter-group select:focus {
+    border-color: #16b8a6;
+}
+
+.chart-description {
+    margin-top: 17px;
+    padding: 12px 15px;
+    background: #f5f8fb;
+    border-radius: 8px;
+    color: #718096;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* Grafik */
+
+.chart-wrapper {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    margin: 25px 0 10px;
+}
+
+#elasticityChart {
+    max-width: 100%;
+}
+
+.empty-data {
+    padding: 35px 15px;
+    text-align: center;
+    color: #8291a1;
+    font-size: 13px;
+}
+
+/* Analisis */
+
+.analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.analysis-item {
+    padding: 20px;
+    background: #f5f8fb;
+    border: 1px solid #e9eef3;
+    border-radius: 10px;
+    min-width: 0;
+}
+
+.analysis-item span {
+    display: block;
+    color: #8291a1;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.analysis-item h3 {
+    color: #20334a;
+    font-size: 17px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.analysis-note {
+    margin-top: 18px;
+    padding: 15px;
+    background: #eef8f7;
+    border-radius: 9px;
+    color: #347e75;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* Tombol */
+
+.action-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 25px 0;
+}
+
+.primary-button,
+.secondary-button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.primary-button {
+    background: #16b8a6;
+    color: white;
+}
+
+.primary-button:hover {
+    background: #109c8e;
+}
+
+.secondary-button {
+    background: #e8eef4;
+    color: #20334a;
+}
+
+.secondary-button:hover {
+    background: #dce5ed;
+}
+
+/* Tampilan tablet dan HP */
+
+@media (max-width: 850px) {
+
+    .page-content .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .analysis-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 550px) {
+
+    .page-content .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-content .page-panel {
+        padding: 17px;
+    }
+
+    .chart-wrapper {
+        height: 320px;
+    }
+
+    .page-header h1 {
+        font-size: 22px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .action-buttons button {
+        width: 100%;
+    }
+
+}
+
+/* =================================================
+   REDESAIN HALAMAN GRAFIK
+================================================= */
+
+.page-header {
+    margin-bottom: 28px;
+}
+
+.page-header h1 {
+    font-size: 27px;
+    font-weight: 700;
+    color: #20334a;
+    margin-bottom: 9px;
+}
+
+.page-header p {
+    font-size: 13px;
+    color: #8291a1;
+    line-height: 1.7;
+}
+
+/* Ringkasan data */
+
+.page-content .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.page-content .stat-card {
+    background: #ffffff;
+    border: 1px solid #e5ebf1;
+    border-radius: 13px;
+    padding: 22px;
+    min-width: 0;
+}
+
+.page-content .stat-card p {
+    color: #8291a1;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.page-content .stat-card h2 {
+    color: #20334a;
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.page-content .stat-card span {
+    color: #9aa8b6;
+    font-size: 11px;
+}
+
+/* Panel */
+
+.page-content .page-panel {
+    background: #ffffff;
+    border: 1px solid #e5ebf1;
+    border-radius: 14px;
+    padding: 25px;
+    margin-bottom: 22px;
+}
+
+.panel-heading {
+    margin-bottom: 20px;
+}
+
+.panel-heading h2 {
+    color: #20334a;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.panel-heading p {
+    color: #8795a5;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* Filter */
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    max-width: 320px;
+    margin-top: 15px;
+}
+
+.filter-group label {
+    color: #435c75;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.filter-group select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #dce5ed;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #20334a;
+    font-size: 13px;
+    outline: none;
+}
+
+.filter-group select:focus {
+    border-color: #16b8a6;
+}
+
+.chart-description {
+    margin-top: 17px;
+    padding: 12px 15px;
+    background: #f5f8fb;
+    border-radius: 8px;
+    color: #718096;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* Grafik */
+
+.chart-wrapper {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    margin: 25px 0 10px;
+}
+
+#elasticityChart {
+    max-width: 100%;
+}
+
+.empty-data {
+    padding: 35px 15px;
+    text-align: center;
+    color: #8291a1;
+    font-size: 13px;
+}
+
+/* Analisis */
+
+.analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.analysis-item {
+    padding: 20px;
+    background: #f5f8fb;
+    border: 1px solid #e9eef3;
+    border-radius: 10px;
+    min-width: 0;
+}
+
+.analysis-item span {
+    display: block;
+    color: #8291a1;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.analysis-item h3 {
+    color: #20334a;
+    font-size: 17px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.analysis-note {
+    margin-top: 18px;
+    padding: 15px;
+    background: #eef8f7;
+    border-radius: 9px;
+    color: #347e75;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* Tombol */
+
+.action-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 25px 0;
+}
+
+.primary-button,
+.secondary-button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.primary-button {
+    background: #16b8a6;
+    color: white;
+}
+
+.primary-button:hover {
+    background: #109c8e;
+}
+
+.secondary-button {
+    background: #e8eef4;
+    color: #20334a;
+}
+
+.secondary-button:hover {
+    background: #dce5ed;
+}
+
+/* Tampilan tablet dan HP */
+
+@media (max-width: 850px) {
+
+    .page-content .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .analysis-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 550px) {
+
+    .page-content .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-content .page-panel {
+        padding: 17px;
+    }
+
+    .chart-wrapper {
+        height: 320px;
+    }
+
+    .page-header h1 {
+        font-size: 22px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .action-buttons button {
+        width: 100%;
+    }
+
+}
+
+/* =================================================
+   REDESAIN HALAMAN GRAFIK
+================================================= */
+
+.page-header {
+    margin-bottom: 28px;
+}
+
+.page-header h1 {
+    font-size: 27px;
+    font-weight: 700;
+    color: #20334a;
+    margin-bottom: 9px;
+}
+
+.page-header p {
+    font-size: 13px;
+    color: #8291a1;
+    line-height: 1.7;
+}
+
+/* Ringkasan data */
+
+.page-content .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.page-content .stat-card {
+    background: #ffffff;
+    border: 1px solid #e5ebf1;
+    border-radius: 13px;
+    padding: 22px;
+    min-width: 0;
+}
+
+.page-content .stat-card p {
+    color: #8291a1;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.page-content .stat-card h2 {
+    color: #20334a;
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.page-content .stat-card span {
+    color: #9aa8b6;
+    font-size: 11px;
+}
+
+/* Panel */
+
+.page-content .page-panel {
+    background: #ffffff;
+    border: 1px solid #e5ebf1;
+    border-radius: 14px;
+    padding: 25px;
+    margin-bottom: 22px;
+}
+
+.panel-heading {
+    margin-bottom: 20px;
+}
+
+.panel-heading h2 {
+    color: #20334a;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.panel-heading p {
+    color: #8795a5;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* Filter */
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    max-width: 320px;
+    margin-top: 15px;
+}
+
+.filter-group label {
+    color: #435c75;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.filter-group select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #dce5ed;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #20334a;
+    font-size: 13px;
+    outline: none;
+}
+
+.filter-group select:focus {
+    border-color: #16b8a6;
+}
+
+.chart-description {
+    margin-top: 17px;
+    padding: 12px 15px;
+    background: #f5f8fb;
+    border-radius: 8px;
+    color: #718096;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* Grafik */
+
+.chart-wrapper {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    margin: 25px 0 10px;
+}
+
+#elasticityChart {
+    max-width: 100%;
+}
+
+.empty-data {
+    padding: 35px 15px;
+    text-align: center;
+    color: #8291a1;
+    font-size: 13px;
+}
+
+/* Analisis */
+
+.analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.analysis-item {
+    padding: 20px;
+    background: #f5f8fb;
+    border: 1px solid #e9eef3;
+    border-radius: 10px;
+    min-width: 0;
+}
+
+.analysis-item span {
+    display: block;
+    color: #8291a1;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.analysis-item h3 {
+    color: #20334a;
+    font-size: 17px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.analysis-note {
+    margin-top: 18px;
+    padding: 15px;
+    background: #eef8f7;
+    border-radius: 9px;
+    color: #347e75;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* Tombol */
+
+.action-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 25px 0;
+}
+
+.primary-button,
+.secondary-button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.primary-button {
+    background: #16b8a6;
+    color: white;
+}
+
+.primary-button:hover {
+    background: #109c8e;
+}
+
+.secondary-button {
+    background: #e8eef4;
+    color: #20334a;
+}
+
+.secondary-button:hover {
+    background: #dce5ed;
+}
+
+/* Tampilan tablet dan HP */
+
+@media (max-width: 850px) {
+
+    .page-content .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .analysis-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 550px) {
+
+    .page-content .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-content .page-panel {
+        padding: 17px;
+    }
+
+    .chart-wrapper {
+        height: 320px;
+    }
+
+    .page-header h1 {
+        font-size: 22px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .action-buttons button {
+        width: 100%;
+    }
+
+}
+
+
+
+/* =========================================
+   LOGIN, KELUAR, MATERI, EVALUASI
+========================================= */
+
+.logout-button {
+    margin-left: 6px;
+    padding: 7px 12px;
+    border: 1px solid #E2E8EF;
+    background: #fff;
+    color: #C0392B;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    background: #FEECEC;
+}
+
+.floating-user {
+    position: fixed;
+    top: 12px;
+    right: 14px;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    border: 1px solid #E2E8EF;
+    border-radius: 999px;
+    padding: 5px 6px 5px 14px;
+    font-size: 12px;
+    color: #20334A;
+    box-shadow: 0 4px 14px rgba(16, 36, 58, .1);
+}
+
+.floating-user button {
+    border: none;
+    background: #FEECEC;
+    color: #C0392B;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ---------- Materi ---------- */
+
+.topic-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.topic-tab {
+    padding: 10px 16px;
+    border: 1px solid #E2E8EF;
+    background: #fff;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #51647A;
+    cursor: pointer;
+}
+
+.topic-tab.active {
+    background: #10243A;
+    color: #fff;
+    border-color: #10243A;
+}
+
+.topic-section {
+    display: none;
+}
+
+.topic-section.active {
+    display: block;
+}
+
+.topic-section h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.topic-section h3 {
+    font-size: 15px;
+    margin: 20px 0 8px;
+    color: #10243A;
+}
+
+.topic-section p,
+.topic-section li {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #3A4D63;
+}
+
+.topic-section ul,
+.topic-section ol {
+    padding-left: 22px;
+}
+
+.formula-box {
+    background: #EEF5FB;
+    border-left: 4px solid #168E7D;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 17px;
+    line-height: 1.9;
+    color: #10243A;
+    font-family: "Times New Roman", serif;
+}
+
+.formula-box small {
+    display: block;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: #6B7C90;
+    line-height: 1.7;
+    margin-top: 4px;
+}
+
+.example-box {
+    background: #FFF8E6;
+    border: 1px solid #F3E2AE;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 16px 0;
+}
+
+.example-box strong {
+    color: #8A6100;
+}
+
+.mat-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 13px;
+}
+
+.mat-table th,
+.mat-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #E9EEF3;
+    text-align: left;
+}
+
+.mat-table th {
+    background: #F1F6FA;
+}
+
+.topic-figure {
+    background: #F8FAFC;
+    border: 1px solid #E9EEF3;
+    border-radius: 10px;
+    padding: 12px;
+    margin: 14px 0;
+    text-align: center;
+}
+
+.topic-figure svg {
+    max-width: 100%;
+    height: auto;
+}
+
+.topic-figure figcaption {
+    font-size: 12px;
+    color: #6B7C90;
+    margin-top: 6px;
+}
+
+.topic-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 26px;
+}
+
+.topic-nav button {
+    padding: 11px 18px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    background: #10243A;
+    color: #fff;
+}
+
+.topic-nav button.ghost {
+    background: #EEF2F6;
+    color: #20334A;
+}
+
+.topic-nav button:disabled {
+    opacity: .35;
+    cursor: default;
+}
+
+/* ---------- Evaluasi ---------- */
+
+.quiz-progress {
+    height: 8px;
+    background: #E9EEF3;
+    border-radius: 99px;
+    overflow: hidden;
+    margin: 10px 0 20px;
+}
+
+.quiz-progress div {
+    height: 100%;
+    width: 0;
+    background: #168E7D;
+    transition: width .3s;
+}
+
+.quiz-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #8795A5;
+}
+
+.quiz-question {
+    font-size: 16px;
+    line-height: 1.7;
+    margin: 6px 0 18px;
+    color: #10243A;
+}
+
+.quiz-options {
+    display: grid;
+    gap: 10px;
+}
+
+.quiz-option {
+    text-align: left;
+    padding: 13px 16px;
+    background: #fff;
+    border: 1.5px solid #DCE4EC;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #20334A;
+    cursor: pointer;
+    line-height: 1.6;
+}
+
+.quiz-option:hover:not(:disabled) {
+    border-color: #168E7D;
+    background: #F2FAF8;
+}
+
+.quiz-option.selected {
+    border-color: #10243A;
+    background: #EEF5FB;
+}
+
+.quiz-option.correct {
+    border-color: #168E7D;
+    background: #E7F6F2;
+}
+
+.quiz-option.wrong {
+    border-color: #C0392B;
+    background: #FEECEC;
+}
+
+.quiz-feedback {
+    margin-top: 16px;
+    padding: 13px 15px;
+    border-radius: 9px;
+    font-size: 13px;
+    line-height: 1.7;
+    background: #F1F6FA;
+}
+
+.score-circle {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 9px solid #168E7D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 6px auto 14px;
+}
+
+.score-circle strong {
+    font-size: 34px;
+    color: #10243A;
+}
+
+.score-circle small {
+    color: #8795A5;
+}
+
+.result-center {
+    text-align: center;
+}
+
+.review-item {
+    border-top: 1px solid #E9EEF3;
+    padding: 14px 0;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.review-item .ok {
+    color: #168E7D;
+    font-weight: bold;
+}
+
+.review-item .no {
+    color: #C0392B;
+    font-weight: bold;
+}
+
+/* ---------- Login ---------- */
+
+.login-body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(22, 142, 125, .25), transparent 45%),
+        linear-gradient(135deg, #10243A, #1B3D5F);
+}
+
+.login-card {
+    width: 100%;
+    max-width: 880px;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, .35);
+}
+
+.login-visual {
+    background: linear-gradient(160deg, #10243A, #168E7D);
+    color: #fff;
+    padding: 42px 34px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-visual .login-logo {
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, .15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.login-visual h1 {
+    font-size: 26px;
+    line-height: 1.3;
+    margin-bottom: 12px;
+}
+
+.login-visual p {
+    font-size: 13px;
+    line-height: 1.8;
+    opacity: .9;
+}
+
+.login-visual ul {
+    list-style: none;
+    margin-top: 20px;
+    font-size: 13px;
+    line-height: 2;
+}
+
+.login-form-wrap {
+    padding: 42px 36px;
+}
+
+.login-form-wrap h2 {
+    font-size: 22px;
+    color: #10243A;
+    margin-bottom: 6px;
+}
+
+.login-form-wrap > p {
+    font-size: 13px;
+    color: #8795A5;
+    margin-bottom: 22px;
+}
+
+.login-field {
+    margin-bottom: 16px;
+}
+
+.login-field label {
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #3A4D63;
+}
+
+.login-field input,
+.login-field select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #DCE4EC;
+    border-radius: 9px;
+    font-size: 14px;
+    background: #fff;
+    color: #20334A;
+}
+
+.login-field input:focus,
+.login-field select:focus {
+    outline: none;
+    border-color: #168E7D;
+    box-shadow: 0 0 0 3px rgba(22, 142, 125, .15);
+}
+
+.login-submit {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 9px;
+    background: #168E7D;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login-submit:hover {
+    background: #11766A;
+}
+
+.login-error {
+    color: #C0392B;
+    font-size: 12px;
+    min-height: 18px;
+    margin-bottom: 8px;
+}
+
+.login-note {
+    margin-top: 16px;
+    font-size: 11px;
+    color: #8795A5;
+    line-height: 1.7;
+}
+
+@media (max-width: 760px) {
+    .login-card {
+        grid-template-columns: 1fr;
+    }
+
+    .login-visual {
+        padding: 28px 24px;
+    }
+
+    .login-visual ul {
+        display: none;
+    }
+
+    .login-form-wrap {
+        padding: 28px 22px;
+    }
+}

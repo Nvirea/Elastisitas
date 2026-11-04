@@ -1,0 +1,975 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10243A">
+  <title>LKPD Digital | Virtual Lab Elastisitas</title>
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* ===== PERBAIKAN STRUKTUR UTAMA ===== */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    .app-container {
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      width: 255px;
+      min-width: 255px;
+      flex: 0 0 255px;
+      min-height: 100vh;
+      background: #10243A;
+      color: white;
+      padding: 22px 15px;
+      display: flex;
+      flex-direction: column;
+      z-index: 1000;
+    }
+
+    .sidebar .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 35px;
+      padding: 0 5px;
+      color: white;
+    }
+
+    .sidebar .brand h2 {
+      color: white;
+      font-size: 19px;
+      font-weight: 700;
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    .sidebar .brand p {
+      color: #b8c9d9;
+      font-size: 12px;
+      margin: 4px 0 0;
+    }
+
+    .sidebar .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      width: 100%;
+    }
+
+    .sidebar .menu a {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 8px;
+      color: #c4d1df;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.4;
+      transition: 0.2s ease;
+    }
+
+    .sidebar .menu a:hover {
+      background: #203c56;
+      color: white;
+    }
+
+    .sidebar .menu a.active {
+      background: #1c756f;
+      color: white;
+      font-weight: 600;
+    }
+
+    /* ===== KONTEN UTAMA ===== */
+    .main-content {
+      flex: 1;
+      min-width: 0;
+      width: calc(100% - 255px);
+      background: #F3F6FA;
+    }
+
+    .topbar {
+      min-height: 70px;
+      padding: 12px 30px;
+      background: white;
+      border-bottom: 1px solid #e9eef3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #20334A;
+      font-size: 14px;
+    }
+
+    .profile-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #dff5f1;
+      color: #168f83;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 700;
+    }
+
+    .menu-toggle {
+      border: none;
+      background: transparent;
+      font-size: 22px;
+      cursor: pointer;
+      color: #20334A;
+      display: none;
+    }
+
+    .page-content {
+      width: 100%;
+      max-width: 1400px;
+      padding: 30px;
+      margin: auto;
+      min-width: 0;
+    }
+
+    /* ===== TAMPILAN LKPD ===== */
+    .lkpd-wrap {
+      width: 100%;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .lkpd-hero {
+      background: linear-gradient(120deg, #10243A, #1d4966);
+      color: white;
+      padding: 30px;
+      border-radius: 16px;
+      margin-bottom: 24px;
+    }
+
+    .lkpd-hero h1 {
+      font-size: 25px;
+      margin: 0 0 12px;
+      color: white;
+    }
+
+    .lkpd-hero p {
+      color: #e1edf6;
+      line-height: 1.7;
+      margin: 5px 0;
+      font-size: 14px;
+    }
+
+    .lkpd-section {
+      background: white;
+      border: 1px solid #e7edf2;
+      border-radius: 13px;
+      padding: 25px;
+      margin-bottom: 20px;
+      min-width: 0;
+    }
+
+    .lkpd-section h2 {
+      font-size: 19px;
+      color: #173653;
+      margin: 0 0 16px;
+    }
+
+    .lkpd-section h3 {
+      font-size: 15px;
+      color: #244762;
+      margin: 22px 0 10px;
+    }
+
+    .lkpd-section p,
+    .lkpd-section li {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #435466;
+    }
+
+    .lkpd-section ol,
+    .lkpd-section ul {
+      padding-left: 22px;
+    }
+
+    .lkpd-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .lkpd-field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 7px;
+      color: #34495e;
+    }
+
+    .lkpd-field input,
+    .lkpd-field textarea {
+      width: 100%;
+      padding: 11px;
+      border: 1px solid #dce4eb;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 14px;
+      color: #20334A;
+      background: white;
+    }
+
+    .lkpd-field textarea {
+      min-height: 85px;
+      resize: vertical;
+    }
+
+    .lkpd-table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      margin: 14px 0;
+    }
+
+    .lkpd-table {
+      width: 100%;
+      min-width: 600px;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .lkpd-table th {
+      background: #173653;
+      color: white;
+      padding: 11px;
+      text-align: center;
+      border: 1px solid #dce4eb;
+    }
+
+    .lkpd-table td {
+      border: 1px solid #dce4eb;
+      padding: 10px;
+      text-align: center;
+      color: #435466;
+    }
+
+    .lkpd-table tbody tr:nth-child(even) {
+      background: #f3f6fa;
+    }
+
+    .lkpd-note {
+      background: #edf6fb;
+      border-left: 4px solid #3b91b5;
+      padding: 13px 16px;
+      border-radius: 6px;
+      margin: 14px 0;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #34536a;
+    }
+
+    .formula {
+      background: #f3f6fa;
+      text-align: center;
+      padding: 17px;
+      border-radius: 9px;
+      font-size: 19px;
+      font-weight: 700;
+      color: #173653;
+      margin: 12px 0;
+    }
+
+    .question {
+      padding: 14px 0;
+      border-bottom: 1px solid #edf0f3;
+    }
+
+    .question p {
+      font-weight: 600;
+      color: #34495e;
+      margin-bottom: 8px;
+    }
+
+    .question textarea {
+      width: 100%;
+      min-height: 75px;
+      border: 1px solid #dce4eb;
+      border-radius: 8px;
+      padding: 10px;
+      font-family: inherit;
+      font-size: 14px;
+    }
+
+    .lkpd-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .lkpd-btn {
+      display: inline-block;
+      border: none;
+      border-radius: 8px;
+      padding: 11px 18px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 13px;
+      text-decoration: none;
+    }
+
+    .lkpd-primary {
+      background: #168f83;
+      color: white;
+    }
+
+    .lkpd-secondary {
+      background: #e9eff5;
+      color: #29445c;
+    }
+
+    .lkpd-danger {
+      background: #fff0ef;
+      color: #b33d35;
+    }
+
+    .lkpd-status {
+      font-size: 12px;
+      color: #168f83;
+      margin-top: 8px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .sidebar {
+        width: 230px;
+        min-width: 230px;
+        flex-basis: 230px;
+      }
+
+      .main-content {
+        width: calc(100% - 230px);
+      }
+
+      .page-content {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: -260px;
+        width: 250px;
+        min-width: 250px;
+        height: 100vh;
+        min-height: 100vh;
+        overflow-y: auto;
+        transition: left 0.25s ease;
+      }
+
+      .sidebar.active {
+        left: 0;
+      }
+
+      .main-content {
+        width: 100%;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .topbar {
+        padding: 12px 18px;
+      }
+
+      .page-content {
+        padding: 17px;
+      }
+
+      .lkpd-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .lkpd-section {
+        padding: 17px;
+      }
+
+      .lkpd-hero {
+        padding: 22px;
+      }
+
+      .lkpd-hero h1 {
+        font-size: 21px;
+      }
+    }
+
+    /* ===== CETAK / PDF ===== */
+    @media print {
+      .sidebar,
+      .topbar,
+      .lkpd-actions,
+      .menu-toggle {
+        display: none !important;
+      }
+
+      .app-container {
+        display: block;
+      }
+
+      .main-content {
+        width: 100%;
+        background: white;
+      }
+
+      .page-content {
+        padding: 0;
+      }
+
+      .lkpd-section {
+        break-inside: avoid;
+        border: 1px solid #aaa;
+        box-shadow: none;
+      }
+
+      .lkpd-hero {
+        background: #173653 !important;
+        color: white !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      input,
+      textarea {
+        color: black !important;
+      }
+    }
+  </style>
+    <script src="js/auth.js"></script>
+</head>
+
+<body>
+
+<div class="app-container">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+      <div>
+        <h2>Virtual Lab</h2>
+        <p>Physics Learning</p>
+      </div>
+    </div>
+
+    <nav class="menu">
+      <a href="index.html">Dashboard</a>
+      <a href="materi.html">Materi Pembelajaran</a>
+      <a href="simulasi.html">Virtual Laboratory</a>
+      <a href="pengamatan.html">Data Pengamatan</a>
+      <a href="grafik.html">Grafik</a>
+      <a href="lkpd.html" class="active">LKPD Digital</a>
+      <a href="evaluasi.html">Evaluasi</a>
+    </nav>
+
+  </aside>
+
+  <!-- KONTEN UTAMA -->
+  <main class="main-content">
+
+    <header class="topbar">
+      <button class="menu-toggle" id="menuToggle" type="button">☰</button>
+
+      <div class="profile">
+        <div class="profile-avatar">V</div>
+        <span>Virtual Lab</span>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="lkpd-wrap">
+
+        <!-- JUDUL -->
+        <section class="lkpd-hero">
+          <h1>LEMBAR KERJA PESERTA DIDIK</h1>
+          <p><b>VIRTUAL LAB ELASTISITAS</b></p>
+          <p>Menyelidiki Hubungan Gaya dan Pertambahan Panjang Pegas Berdasarkan Hukum Hooke</p>
+          <p>Model Pembelajaran: <b>Guided Inquiry (Inkuiri Terbimbing)</b></p>
+        </section>
+
+        <!-- IDENTITAS -->
+        <section class="lkpd-section">
+          <h2>Identitas Peserta Didik</h2>
+
+          <div class="lkpd-grid">
+            <div class="lkpd-field">
+              <label for="studentName">Nama</label>
+              <input id="studentName" data-save>
+            </div>
+
+            <div class="lkpd-field">
+              <label for="studentClass">Kelas</label>
+              <input id="studentClass" data-save>
+            </div>
+
+            <div class="lkpd-field">
+              <label for="studentGroup">Kelompok</label>
+              <input id="studentGroup" data-save>
+            </div>
+
+            <div class="lkpd-field">
+              <label for="experimentDate">Tanggal praktikum</label>
+              <input id="experimentDate" type="date" data-save>
+            </div>
+          </div>
+
+          <div class="lkpd-field" style="margin-top:14px">
+            <label for="groupMembers">Anggota kelompok (maksimal 4 orang)</label>
+            <textarea id="groupMembers" data-save placeholder="1. ...&#10;2. ...&#10;3. ...&#10;4. ..."></textarea>
+          </div>
+        </section>
+
+        <!-- IDENTITAS LKPD -->
+        <section class="lkpd-section">
+          <h2>Identitas LKPD</h2>
+
+          <div class="lkpd-table-wrap">
+            <table class="lkpd-table">
+              <tr><th>Komponen</th><th>Keterangan</th></tr>
+              <tr><td>Satuan pendidikan</td><td>SMA/MA</td></tr>
+              <tr><td>Mata pelajaran</td><td>Fisika</td></tr>
+              <tr><td>Fase/Kelas</td><td>F / XI</td></tr>
+              <tr><td>Materi</td><td>Elastisitas</td></tr>
+              <tr><td>Submateri</td><td>Sifat elastis dan plastis, Hukum Hooke, dan konstanta pegas</td></tr>
+              <tr><td>Model pembelajaran</td><td>Guided Inquiry (Inkuiri Terbimbing)</td></tr>
+              <tr><td>Media pembelajaran</td><td>Virtual Lab Elastisitas</td></tr>
+              <tr><td>Alokasi waktu</td><td>3 JP (135 menit)</td></tr>
+            </table>
+          </div>
+        </section>
+
+        <!-- CAPAIAN DAN TUJUAN -->
+        <section class="lkpd-section">
+          <h2>Capaian Pembelajaran</h2>
+          <p>Pada akhir Fase F, peserta didik menganalisis hubungan gerak dan gaya serta pemanfaatannya untuk menjelaskan fenomena alam, desain, atau rekayasa struktur; menganalisis gejala gelombang dan penerapannya dalam kehidupan sehari-hari; mengevaluasi rangkaian listrik; menganalisis fenomena elektromagnetik; serta menganalisis teori dasar fisika modern dan pengaruhnya terhadap perkembangan teknologi.</p>
+
+          <h2 style="margin-top:22px">Tujuan Pembelajaran</h2>
+          <ol>
+            <li>Mengidentifikasi fenomena elastisitas dalam kehidupan sehari-hari serta membedakan sifat elastis dan plastis berdasarkan hasil pengamatan.</li>
+            <li>Merumuskan hipotesis mengenai hubungan antara besar gaya yang diberikan dengan pertambahan panjang pegas.</li>
+            <li>Melakukan penyelidikan virtual menggunakan aplikasi simulasi dengan memvariasikan massa beban untuk memperoleh data hubungan gaya dan pertambahan panjang pegas.</li>
+            <li>Menganalisis data hasil simulasi melalui perhitungan konstanta pegas dan interpretasi grafik hubungan gaya terhadap pertambahan panjang.</li>
+            <li>Menarik kesimpulan mengenai hubungan antara gaya, pertambahan panjang, dan konstanta pegas berdasarkan hasil penyelidikan serta mengomunikasikan hasil penyelidikan.</li>
+          </ol>
+        </section>
+
+        <!-- PETUNJUK -->
+        <section class="lkpd-section">
+          <h2>Petunjuk Penggunaan LKPD</h2>
+          <ol>
+            <li>Bacalah setiap bagian LKPD sebelum memulai kegiatan praktikum.</li>
+            <li>Pahami fenomena dan pertanyaan pemantik yang disajikan.</li>
+            <li>Diskusikan permasalahan bersama anggota kelompok.</li>
+            <li>Rumuskan hipotesis berdasarkan pengetahuan awal dan hasil pengamatan.</li>
+            <li>Buka aplikasi simulasi Hukum Hooke pada perangkat yang digunakan.</li>
+            <li>Ikuti prosedur praktikum dan gunakan fitur aplikasi sesuai petunjuk.</li>
+            <li>Variasikan massa beban sesuai instruksi, lalu catat hasil pengamatan secara teliti.</li>
+            <li>Lakukan perhitungan dan analisis data berdasarkan hasil simulasi.</li>
+            <li>Jawablah pertanyaan diskusi dengan menggunakan bukti hasil percobaan.</li>
+            <li>Susun kesimpulan dan komunikasikan hasil penyelidikan kelompok.</li>
+          </ol>
+
+          <div class="lkpd-note">
+            <b>Ketentuan praktikum:</b>
+            <ul>
+              <li>Gunakan satu jenis pegas selama satu rangkaian pengambilan data.</li>
+              <li>Jangan mengubah lebih dari satu variabel dalam satu kali pengamatan.</li>
+              <li>Pastikan satuan massa, gaya, dan panjang dituliskan dengan benar.</li>
+              <li>Gunakan data yang benar-benar diperoleh dari aplikasi, bukan data perkiraan.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- APLIKASI DAN ALAT BAHAN -->
+        <section class="lkpd-section">
+          <h2>Aplikasi, Alat, dan Bahan Praktikum</h2>
+          <p>Virtual Lab Elastisitas merupakan media praktikum virtual untuk menyelidiki hubungan antara gaya dan pertambahan panjang pegas. Peserta didik memberikan variasi massa beban dan mengamati perubahan panjang pegas melalui simulasi.</p>
+
+          <h3>Fitur aplikasi</h3>
+          <ul>
+            <li>Pilihan jenis pegas: menentukan pegas yang digunakan, apabila fitur tersedia.</li>
+            <li>Pengaturan massa beban: mengubah besar massa yang diberikan pada pegas.</li>
+            <li>Visualisasi pegas: memperlihatkan perubahan panjang pegas ketika diberikan beban.</li>
+            <li>Pengukuran panjang: mengetahui panjang awal dan panjang akhir pegas.</li>
+            <li>Tampilan hasil pengamatan: membantu memperoleh data percobaan.</li>
+            <li>Grafik: menampilkan hubungan gaya dan pertambahan panjang pegas.</li>
+            <li>Tombol reset: mengembalikan simulasi ke kondisi awal.</li>
+          </ul>
+
+          <h3>Alat dan bahan</h3>
+          <ol>
+            <li>Laptop/komputer/telepon genggam untuk menjalankan aplikasi.</li>
+            <li>Aplikasi simulasi Hukum Hooke sebagai media praktikum virtual.</li>
+            <li>LKPD sebagai panduan penyelidikan dan pencatatan data.</li>
+            <li>Kalkulator untuk membantu menghitung gaya dan konstanta pegas.</li>
+            <li>Alat tulis untuk mencatat hasil pengamatan dan menjawab pertanyaan.</li>
+          </ol>
+        </section>
+
+        <!-- MATERI -->
+        <section class="lkpd-section">
+          <h2>Materi Pembelajaran</h2>
+
+          <h3>1. Elastisitas</h3>
+          <p>Elastisitas merupakan kemampuan suatu benda untuk kembali ke bentuk atau ukuran semula setelah gaya yang bekerja padanya dihilangkan, selama benda belum melampaui batas elastisnya.</p>
+          <ul>
+            <li><b>Benda elastis:</b> benda yang dapat kembali ke bentuk semula setelah gaya dihilangkan, selama masih dalam batas elastis. Contoh: pegas dan karet.</li>
+            <li><b>Benda plastis:</b> benda yang mengalami perubahan bentuk permanen setelah diberikan gaya. Contoh: plastisin dan tanah liat.</li>
+          </ul>
+
+          <h3>2. Hukum Hooke</h3>
+          <p>Hukum Hooke menyatakan bahwa pertambahan panjang pegas sebanding dengan gaya yang diberikan, selama pegas masih berada dalam batas elastisnya.</p>
+          <div class="formula">F = k × Δx</div>
+          <p>F = gaya (N), k = konstanta pegas (N/m), dan Δx = pertambahan panjang (m).</p>
+          <div class="formula">Δx = x − x₀</div>
+          <p>x adalah panjang akhir dan x₀ adalah panjang awal.</p>
+
+          <h3>3. Gaya berat</h3>
+          <div class="formula">F = m × g</div>
+          <p>m = massa beban (kg), g = percepatan gravitasi (m/s²). Pada kegiatan ini gunakan g = 10 m/s², kecuali guru menentukan nilai lain.</p>
+
+          <h3>4. Konstanta pegas</h3>
+          <p>Konstanta pegas menunjukkan tingkat kekakuan pegas. Semakin besar konstanta pegas, semakin besar gaya yang diperlukan untuk menghasilkan pertambahan panjang yang sama. Pada grafik gaya (F) terhadap pertambahan panjang (Δx), gradien grafik linear menyatakan konstanta pegas.</p>
+        </section>
+
+        <!-- KEGIATAN GUIDED INQUIRY -->
+        <section class="lkpd-section">
+          <h2>Kegiatan Praktikum – Guided Inquiry</h2>
+
+          <h3>Kegiatan 1. Orientasi dan identifikasi fenomena</h3>
+          <p>Pernahkah kalian memperhatikan pegas pada timbangan gantung, kasur pegas, atau suspensi kendaraan? Ketika diberikan beban, pegas mengalami perubahan panjang. Ketika beban dilepaskan, pegas dapat kembali ke bentuk semula selama tidak melampaui batas elastisnya.</p>
+
+          <p><b>Pertanyaan pemantik:</b></p>
+          <ol>
+            <li>Mengapa pegas mengalami pertambahan panjang ketika diberikan beban?</li>
+            <li>Apakah semakin besar beban selalu menghasilkan pertambahan panjang yang semakin besar?</li>
+            <li>Apakah semua pegas memiliki kemampuan memanjang yang sama?</li>
+            <li>Apa yang mungkin terjadi jika pegas diberikan gaya secara berlebihan?</li>
+          </ol>
+
+          <div class="lkpd-field">
+            <label for="orientationAnswer">Jawaban hasil diskusi</label>
+            <textarea id="orientationAnswer" data-save></textarea>
+          </div>
+
+          <h3>Kegiatan 2. Merumuskan masalah</h3>
+          <p><b>Pertanyaan penyelidikan utama:</b> Bagaimana pengaruh perubahan massa beban terhadap pertambahan panjang pegas, dan bagaimana hubungan tersebut dapat digunakan untuk menentukan konstanta pegas?</p>
+
+          <div class="lkpd-field">
+            <label for="problemStatement">Rumusan masalah kelompok</label>
+            <textarea id="problemStatement" data-save></textarea>
+          </div>
+
+          <h3>Kegiatan 3. Merumuskan hipotesis</h3>
+          <ol>
+            <li>Apa yang terjadi pada panjang pegas jika massa beban diperbesar?</li>
+            <li>Bagaimana hubungan gaya berat dengan pertambahan panjang pegas?</li>
+            <li>Jika dua pegas memiliki pertambahan panjang berbeda ketika diberikan gaya yang sama, apakah keduanya memiliki konstanta pegas yang sama?</li>
+          </ol>
+
+          <div class="lkpd-field">
+            <label for="hypothesis">Hipotesis kelompok</label>
+            <textarea id="hypothesis" data-save></textarea>
+          </div>
+
+          <h3>Kegiatan 4. Melakukan penyelidikan virtual</h3>
+          <p><b>A. Persiapan percobaan</b></p>
+          <ol>
+            <li>Siapkan perangkat berupa laptop, komputer, atau telepon genggam.</li>
+            <li>Buka aplikasi simulasi Hukum Hooke.</li>
+            <li>Kenali fitur-fitur yang tersedia.</li>
+            <li>Pilih satu jenis pegas untuk digunakan selama percobaan.</li>
+            <li>Amati panjang awal pegas tanpa beban dan catat sebagai x₀.</li>
+          </ol>
+
+          <p><b>B. Langkah-langkah percobaan</b></p>
+          <ol>
+            <li>Pastikan pegas berada dalam keadaan awal tanpa beban.</li>
+            <li>Catat panjang awal pegas (x₀).</li>
+            <li>Berikan beban pertama dengan massa 0,05 kg.</li>
+            <li>Amati dan catat panjang akhir pegas (x).</li>
+            <li>Hitung pertambahan panjang pegas (Δx = x − x₀).</li>
+            <li>Ulangi pengamatan dengan massa 0,10 kg; 0,15 kg; 0,20 kg; dan 0,25 kg.</li>
+            <li>Pastikan jenis pegas dan kondisi awal pengukuran tetap sama.</li>
+            <li>Catat seluruh hasil pengamatan pada tabel.</li>
+            <li>Setelah data lengkap, hitung gaya berat dan konstanta pegas.</li>
+          </ol>
+
+          <div class="lkpd-note">
+            Variabel bebas: massa beban. Variabel terikat: pertambahan panjang pegas. Variabel kontrol: jenis pegas, panjang awal, kondisi pengukuran, dan percepatan gravitasi.
+          </div>
+
+          <div class="lkpd-actions">
+            <a href="simulasi.html" class="lkpd-btn lkpd-primary">Buka Virtual Laboratory</a>
+          </div>
+
+          <h3>Pertanyaan selama penyelidikan</h3>
+
+          <div class="question">
+            <p>1. Apa perubahan yang terjadi pada pegas ketika massa beban ditambahkan?</p>
+            <textarea id="investigation1" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>2. Bagaimana perubahan pertambahan panjang ketika massa beban semakin besar?</p>
+            <textarea id="investigation2" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>3. Apakah perubahan panjang pegas menunjukkan pola yang teratur?</p>
+            <textarea id="investigation3" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>4. Apakah pegas selalu dapat kembali ke panjang awal setelah beban dihilangkan? Jelaskan berdasarkan konsep batas elastis.</p>
+            <textarea id="investigation4" data-save></textarea>
+          </div>
+        </section>
+
+        <!-- DATA PERCOBAAN -->
+        <section class="lkpd-section">
+          <h2>Data Hasil Percobaan</h2>
+
+          <div class="lkpd-field">
+            <label for="springType">Jenis pegas yang digunakan</label>
+            <input id="springType" data-save placeholder="Tuliskan jenis pegas">
+          </div>
+
+          <div class="lkpd-field" style="margin-top:12px">
+            <label for="initialLength">Panjang awal pegas (m)</label>
+            <input id="initialLength" data-save type="number" min="0" step="any" placeholder="Contoh: 0,10">
+          </div>
+
+          <h3>Tabel 1. Hasil pengamatan hubungan massa beban dan pertambahan panjang pegas</h3>
+
+          <div class="lkpd-table-wrap">
+            <table class="lkpd-table">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Massa (kg)</th>
+                  <th>Panjang akhir (m)</th>
+                  <th>Pertambahan panjang (m)</th>
+                </tr>
+              </thead>
+              <tbody id="lkpdObservationBody">
+                <tr><td colspan="4">Data pengamatan belum tersedia.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="lkpd-status" id="observationStatus">Data akan ditampilkan dari hasil simulasi yang tersimpan.</p>
+
+          <h3>Tabel 2. Hasil perhitungan gaya dan konstanta pegas</h3>
+
+          <div class="lkpd-table-wrap">
+            <table class="lkpd-table">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Massa (kg)</th>
+                  <th>Gaya berat (N)</th>
+                  <th>Δx (m)</th>
+                  <th>Konstanta pegas (N/m)</th>
+                </tr>
+              </thead>
+              <tbody id="calculationBody">
+                <tr><td colspan="5">Perhitungan belum tersedia.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="lkpd-note">
+            <b>Petunjuk pengolahan data:</b>
+            <ol>
+              <li>Hitung gaya berat setiap beban menggunakan F = m × g.</li>
+              <li>Hitung pertambahan panjang dengan mengurangkan panjang akhir dan panjang awal.</li>
+              <li>Tentukan konstanta pegas menggunakan k = F/Δx.</li>
+              <li>Hitung rata-rata konstanta pegas dari hasil pengukuran.</li>
+              <li>Tuliskan hasil perhitungan dengan satuan yang tepat.</li>
+            </ol>
+          </div>
+
+          <p><b>Rata-rata konstanta pegas:</b> <span id="averageSpringConstant">Belum dihitung</span></p>
+        </section>
+
+        <!-- ANALISIS -->
+        <section class="lkpd-section">
+          <h2>Ayo Analisis Data dan Grafik!</h2>
+
+          <p>Buat grafik hubungan gaya berat (F) pada sumbu Y dan pertambahan panjang (Δx) pada sumbu X berdasarkan data Tabel 2.</p>
+
+          <ul>
+            <li>Sumbu horizontal (X): pertambahan panjang (m).</li>
+            <li>Sumbu vertikal (Y): gaya berat (N).</li>
+            <li>Plot seluruh pasangan data hasil percobaan.</li>
+            <li>Tarik garis kecenderungan terbaik (best fit) jika data menunjukkan hubungan linear.</li>
+            <li>Tentukan gradien grafik sebagai nilai konstanta pegas.</li>
+          </ul>
+
+          <div class="lkpd-note">
+            Gunakan halaman Grafik untuk melihat visualisasi data apabila data percobaan telah sesuai dengan variasi massa pada LKPD.
+          </div>
+
+          <a href="grafik.html" class="lkpd-btn lkpd-secondary">Buka Halaman Grafik</a>
+
+          <h3>Pertanyaan analisis</h3>
+
+          <div class="question">
+            <p>1. Bagaimana hubungan antara massa beban dengan pertambahan panjang pegas berdasarkan data yang diperoleh?</p>
+            <textarea id="analysis1" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>2. Apakah gaya berat berbanding lurus dengan pertambahan panjang pegas? Jelaskan berdasarkan tabel pengamatan.</p>
+            <textarea id="analysis2" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>3. Berapa nilai konstanta pegas yang diperoleh dari hasil perhitungan?</p>
+            <textarea id="analysis3" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>4. Apakah nilai konstanta pegas dari setiap percobaan relatif sama? Jika terdapat perbedaan, apa kemungkinan penyebabnya?</p>
+            <textarea id="analysis4" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>5. Bagaimana bentuk grafik hubungan gaya berat terhadap pertambahan panjang pegas?</p>
+            <textarea id="analysis5" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>6. Apa makna gradien pada grafik yang telah kalian buat?</p>
+            <textarea id="analysis6" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>7. Apakah hasil penyelidikan sesuai dengan hipotesis awal kelompok? Berikan alasan berdasarkan data.</p>
+            <textarea id="analysis7" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>8. Bagaimana cara menentukan pegas yang lebih kaku berdasarkan nilai konstanta pegas?</p>
+            <textarea id="analysis8" data-save></textarea>
+          </div>
+        </section>
+
+        <!-- KESIMPULAN -->
+        <section class="lkpd-section">
+          <h2>Ayo Tarik Kesimpulan!</h2>
+
+          <div class="question">
+            <p>1. Hubungan antara gaya dan pertambahan panjang pegas:</p>
+            <textarea id="conclusion1" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>2. Nilai konstanta pegas berdasarkan hasil percobaan:</p>
+            <textarea id="conclusion2" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>3. Hubungan antara nilai konstanta pegas dengan kekakuan pegas:</p>
+            <textarea id="conclusion3" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>4. Kesesuaian hasil percobaan dengan hipotesis:</p>
+            <textarea id="conclusion4" data-save></textarea>
+          </div>
+        </section>
+
+        <!-- KOMUNIKASI -->
+        <section class="lkpd-section">
+          <h2>Ayo Komunikasikan Hasil Penyelidikan!</h2>
+          <p>Presentasikan hasil praktikum kelompok dengan memperhatikan hal-hal berikut:</p>
+          <ul>
+            <li>Menjelaskan tujuan dan prosedur percobaan.</li>
+            <li>Menunjukkan data hasil pengamatan.</li>
+            <li>Menjelaskan hasil perhitungan konstanta pegas.</li>
+            <li>Menampilkan dan menginterpretasikan grafik.</li>
+            <li>Menyampaikan kesimpulan berdasarkan hasil penyelidikan.</li>
+            <li>Menanggapi pertanyaan atau masukan dari kelompok lain.</li>
+          </ul>
+        </section>
+
+        <!-- REFLEKSI -->
+        <section class="lkpd-section">
+          <h2>Refleksi Individu</h2>
+
+          <div class="question">
+            <p>1. Apa pengetahuan baru yang kalian peroleh dari praktikum virtual ini?</p>
+            <textarea id="reflection1" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>2. Bagian kegiatan manakah yang paling membantu kalian memahami Hukum Hooke?</p>
+            <textarea id="reflection2" data-save></textarea>
+          </div>
+
+          <div class="question">
+            <p>3. Apakah penggunaan aplikasi simulasi membantu kalian melakukan praktikum? Jelaskan alasannya.</p>
+            <textarea id="reflection3" data-save></textarea>
+          </div>
+        </section>
+
+        <!-- TOMBOL -->
+        <div class="lkpd-actions">
+          <button type="button" class="lkpd-btn lkpd-primary" id="printLKPD">
+            Cetak / Simpan PDF
+          </button>
+
+          <button type="button" class="lkpd-btn lkpd-secondary" id="refreshLKPD">
+            Perbarui Data Pengamatan
+          </button>
+
+          <button type="button" class="lkpd-btn lkpd-danger" id="clearAnswers">
+            Hapus Jawaban LKPD
+          </button>
+        </div>
+
+        <p class="lkpd-status" id="saveStatus">
+          Jawaban tersimpan otomatis pada perangkat ini.
+        </p>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/lkpd.js"></script>
+
+</body>
+</html>

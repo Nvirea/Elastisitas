@@ -1,0 +1,12 @@
+
+{
+    "name": "VIRTUAL LAB: ELASTISITAS",
+    "short_name": "Virtual Lab",
+    "description": "Laboratorium virtual pembelajaran elastisitas dan Hukum Hooke untuk siswa SMA.",
+    "start_url": "./login.html",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "any",
+    "background_color": "#F3F6FA",
+    "theme_color": "#10243A"
+}

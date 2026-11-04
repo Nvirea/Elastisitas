@@ -1,0 +1,689 @@
+
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#10243A">
+
+    <title>VIRTUAL LAB: ELASTISITAS</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f3f6fa;
+            color: #20334a;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        /* HALAMAN UTAMA */
+        .simulation-page {
+            width: 100%;
+            max-width: none;
+            min-height: 100vh;
+            margin: 0;
+            padding: 24px 32px 40px;
+        }
+
+        .simulation-header {
+            margin-bottom: 22px;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #168e7d;
+            text-decoration: none;
+            margin-bottom: 16px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            color: #0e6f62;
+        }
+
+        .simulation-header h1 {
+            font-size: clamp(25px, 2.2vw, 34px);
+            margin: 0 0 8px;
+            color: #10243a;
+        }
+
+        .simulation-header p {
+            color: #718096;
+            font-size: 15px;
+            margin: 0;
+        }
+
+        /* SUSUNAN PANEL */
+        .simulation-layout {
+            display: grid;
+            grid-template-columns: 310px minmax(0, 1fr);
+            gap: 22px;
+            align-items: stretch;
+        }
+
+        .control-panel,
+        .experiment-panel,
+        .result-panel {
+            background: white;
+            border: 1px solid #e1e8ef;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 15px rgba(16, 36, 58, 0.04);
+            min-width: 0;
+        }
+
+        .panel-title {
+            font-size: 19px;
+            color: #10243a;
+            margin: 0 0 22px;
+        }
+
+        /* PANEL KONTROL */
+        .control-group {
+            margin-bottom: 24px;
+        }
+
+        .control-group > label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 11px;
+            color: #20334a;
+        }
+
+        .control-group select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #dce4ec;
+            border-radius: 9px;
+            background: white;
+            color: #20334a;
+            font-size: 14px;
+            outline-color: #168e7d;
+        }
+
+        /* PENGATURAN MASSA */
+        .mass-control {
+            margin-bottom: 22px;
+        }
+
+        .mass-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .mass-heading label {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .mass-heading strong {
+            color: #168e7d;
+            font-size: 20px;
+        }
+
+        #massSlider {
+            width: 100%;
+            accent-color: #168e7d;
+            cursor: pointer;
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            color: #718096;
+            font-size: 12px;
+            margin-top: 7px;
+        }
+
+        .mass-input-wrapper {
+            margin-top: 20px;
+        }
+
+        .mass-input-wrapper label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .mass-input-wrapper input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dce4ec;
+            border-radius: 9px;
+            font-size: 14px;
+            outline-color: #168e7d;
+        }
+
+        /* TOMBOL */
+        .control-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .action-button {
+            border: none;
+            padding: 13px 10px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            filter: brightness(0.96);
+        }
+
+        .start-button {
+            background: #168e7d;
+            color: white;
+        }
+
+        .reset-button {
+            background: #edf1f5;
+            color: #20334a;
+        }
+
+        .save-button {
+            background: #10243a;
+            color: white;
+            width: 100%;
+            margin-top: 11px;
+        }
+
+        /* PERSAMAAN */
+        .formula-info {
+            margin-top: 25px;
+            padding: 18px;
+            background: #f1f6fa;
+            border-radius: 11px;
+            font-size: 13px;
+            line-height: 2;
+        }
+
+        .formula-info strong {
+            display: block;
+            margin-bottom: 7px;
+            color: #10243a;
+        }
+
+        .note-info {
+            color: #718096;
+            font-size: 11px;
+            margin-top: 14px;
+            line-height: 1.7;
+        }
+
+        /* AREA SIMULASI */
+        .experiment-panel {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .experiment-stage {
+            width: 100%;
+            flex: 1;
+            min-height: 520px;
+            background: #eef4f8;
+            border-radius: 13px;
+            padding: 15px;
+            overflow: hidden;
+        }
+
+        #experimentCanvas {
+            display: block;
+            width: 100%;
+            height: clamp(480px, 65vh, 720px);
+        }
+
+        .simulation-status {
+            margin-top: 14px;
+            padding: 14px 16px;
+            background: #e7f6f2;
+            border-radius: 9px;
+            color: #168e7d;
+            font-size: 13px;
+            min-height: 44px;
+        }
+
+        /* KARTU HASIL */
+        .measurement-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 13px;
+            margin-top: 17px;
+        }
+
+        .measurement-card {
+            background: #f5f8fb;
+            padding: 18px;
+            border: 1px solid #e9eef3;
+            border-radius: 11px;
+            min-width: 0;
+        }
+
+        .measurement-card span {
+            display: block;
+            color: #718096;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .measurement-card h3 {
+            font-size: clamp(17px, 1.5vw, 22px);
+            margin: 0;
+            color: #10243a;
+            overflow-wrap: anywhere;
+        }
+
+        /* TABEL */
+        .data-section {
+            margin-top: 25px;
+        }
+
+        .data-section h2 {
+            font-size: 20px;
+            margin: 0 0 18px;
+            color: #10243a;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .observation-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+
+        .observation-table th,
+        .observation-table td {
+            padding: 15px 12px;
+            border-bottom: 1px solid #e7edf2;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .observation-table th {
+            background: #f1f6fa;
+            color: #20334a;
+            font-weight: 700;
+        }
+
+        .observation-table tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        /* RESPONSIVE */
+        @media (min-width: 1500px) {
+            .simulation-page {
+                padding-left: 42px;
+                padding-right: 42px;
+            }
+
+            .simulation-layout {
+                grid-template-columns: 340px minmax(0, 1fr);
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .simulation-layout {
+                grid-template-columns: 280px minmax(0, 1fr);
+                gap: 15px;
+            }
+
+            .control-panel,
+            .experiment-panel {
+                padding: 18px;
+            }
+
+            .experiment-stage {
+                min-height: 430px;
+            }
+
+            #experimentCanvas {
+                height: 460px;
+            }
+        }
+
+
+@media (max-width: 760px) {
+    .simulation-page {
+        padding: 15px 12px 25px;
+    }
+
+    .simulation-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .control-panel {
+        order: 1;
+    }
+
+    .experiment-panel {
+        order: 2;
+        padding: 16px;
+    }
+
+    .experiment-stage {
+        min-height: 530px;
+        padding: 8px;
+    }
+
+    #experimentCanvas {
+        height: 520px;
+    }
+
+    .measurement-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 450px) {
+    .simulation-page {
+        padding: 12px 10px 25px;
+    }
+
+    .experiment-panel {
+        padding: 13px;
+    }
+
+    .experiment-stage {
+        min-height: 510px;
+        padding: 5px;
+    }
+
+    #experimentCanvas {
+        height: 500px;
+    }
+
+    .measurement-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .measurement-card {
+        padding: 12px;
+    }
+
+    .measurement-card h3 {
+        font-size: 16px;
+    }
+
+    .measurement-card span {
+        font-size: 11px;
+    }
+}
+
+    </style>
+    <script src="js/auth.js"></script>
+</head>
+
+<body>
+
+<main class="simulation-page">
+
+    <a href="index.html" class="back-link">
+        ← Kembali ke Dashboard
+    </a>
+
+    <header class="simulation-header">
+        <h1>VIRTUAL LAB: ELASTISITAS</h1>
+        <p>
+            Laboratorium virtual untuk mempelajari pengaruh gaya
+            dan massa beban terhadap perubahan panjang bahan.
+        </p>
+    </header>
+
+    <div class="simulation-layout">
+
+        <!-- PANEL KONTROL -->
+        <section class="control-panel">
+
+            <h2 class="panel-title">Pengaturan Percobaan</h2>
+
+            <!-- PILIH BAHAN -->
+            <div class="control-group">
+
+                <label for="materialSelect">
+                    1. Pilih Bahan
+                </label>
+
+                <select id="materialSelect">
+                    <option value="steel">Baja</option>
+                    <option value="aluminum">Aluminium</option>
+                    <option value="copper">Tembaga</option>
+                    <option value="brass">Kuningan</option>
+                    <option value="wood">Kayu</option>
+                    <option value="rubber">Karet</option>
+                    <option value="plastic">Plastik (PVC)</option>
+                    <option value="spring">Pegas</option>
+                </select>
+
+            </div>
+
+            <!-- PENGATURAN MASSA -->
+            <div class="control-group">
+
+                <label>2. Atur Massa Beban</label>
+
+                <div class="mass-control">
+
+                    <div class="mass-heading">
+                        <span>Massa yang digunakan</span>
+                        <strong id="massDisplay">1,0 kg</strong>
+                    </div>
+
+                    <input
+                        type="range"
+                        id="massSlider"
+                        min="0.1"
+                        max="5"
+                        step="0.1"
+                        value="1"
+                    >
+
+                    <div class="slider-labels">
+                        <span>0,1 kg</span>
+                        <span>5 kg</span>
+                    </div>
+
+                    <div class="mass-input-wrapper">
+                        <label for="massInput">
+                            Masukkan massa secara manual (kg)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="massInput"
+                            min="0.1"
+                            max="5"
+                            step="0.1"
+                            value="1"
+                        >
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- KONTROL SIMULASI -->
+            <div class="control-group">
+
+                <label>3. Kontrol Simulasi</label>
+
+                <div class="control-buttons">
+
+                    <button
+                        class="action-button start-button"
+                        id="startButton"
+                        type="button"
+                    >
+                        ▶ Mulai
+                    </button>
+
+                    <button
+                        class="action-button reset-button"
+                        id="resetButton"
+                        type="button"
+                    >
+                        ↻ Reset
+                    </button>
+
+                </div>
+
+                <button
+                    class="action-button save-button"
+                    id="saveButton"
+                    type="button"
+                >
+                    + Simpan Pengamatan
+                </button>
+
+            </div>
+
+            <!-- PERSAMAAN FISIKA -->
+            <div class="formula-info">
+
+                <strong>Persamaan Fisika</strong>
+
+                <div>Gaya berat: F = m × g</div>
+                <div>Hukum Hooke: F = k × Δx</div>
+                <div>Pertambahan panjang: Δx = F / k</div>
+
+                <div style="margin-top:8px">
+                    Percepatan gravitasi: 10 m/s²
+                </div>
+
+            </div>
+
+            <p class="note-info">
+                Parameter kekakuan bahan merupakan nilai model
+                ilustratif untuk pembelajaran. Nilai sebenarnya
+                dapat berbeda bergantung pada jenis dan karakteristik
+                bahan.
+            </p>
+
+        </section>
+
+        <!-- AREA EKSPERIMEN -->
+        <section class="experiment-panel">
+
+            <h2 class="panel-title">
+                Visualisasi Eksperimen
+            </h2>
+
+            <div class="experiment-stage">
+
+                <canvas id="experimentCanvas">
+                    Browser tidak mendukung Canvas.
+                </canvas>
+
+            </div>
+
+            <div
+                class="simulation-status"
+                id="simulationStatus"
+            >
+                Status: Siap melakukan percobaan.
+            </div>
+
+            <!-- HASIL PENGUKURAN -->
+            <div class="measurement-grid">
+
+                <div class="measurement-card">
+                    <span>Massa Beban</span>
+                    <h3 id="massValue">1,0 kg</h3>
+                </div>
+
+                <div class="measurement-card">
+                    <span>Gaya Berat</span>
+                    <h3 id="forceValue">10 N</h3>
+                </div>
+
+                <div class="measurement-card">
+                    <span>Pertambahan Panjang</span>
+                    <h3 id="extensionValue">0 mm</h3>
+                </div>
+
+                <div class="measurement-card">
+                    <span>Panjang Awal</span>
+                    <h3 id="initialValue">100 mm</h3>
+                </div>
+
+                <div class="measurement-card">
+                    <span>Panjang Akhir</span>
+                    <h3 id="finalValue">100 mm</h3>
+                </div>
+
+                <div class="measurement-card">
+                    <span>Kekakuan Model</span>
+                    <h3 id="stiffnessValue">-</h3>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <!-- TABEL PENGAMATAN -->
+    <section class="result-panel data-section">
+
+        <h2>Data Hasil Pengamatan</h2>
+
+        <div class="table-wrapper">
+
+            <table class="observation-table">
+
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Bahan</th>
+                        <th>Massa (kg)</th>
+                        <th>Gaya (N)</th>
+                        <th>Pertambahan Panjang (mm)</th>
+                        <th>Panjang Akhir (mm)</th>
+                    </tr>
+                </thead>
+
+                <tbody id="observationBody">
+
+                    <tr>
+                        <td colspan="6">
+                            Belum ada data pengamatan.
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script src="js/simulasi.js"></script>
+
+</body>
+</html>
