@@ -1,0 +1,5 @@
+name = "virtual-lab-elastisitas"
+compatibility_date = "2025-01-01"
+
+[assets]
+directory = "./public"

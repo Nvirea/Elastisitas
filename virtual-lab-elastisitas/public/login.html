@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#10243A">
+    <meta name="description" content="Virtual Lab Elastisitas: media pembelajaran fisika SMA untuk Hukum Hooke, tegangan, regangan, dan Modulus Young.">
+    <title>Masuk | Virtual Lab Elastisitas</title>
+    <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/auth.js"></script>
+</head>
+
+<body class="login-body">
+
+    <div class="login-card">
+
+        <div class="login-visual">
+            <div class="login-logo">⚛</div>
+            <h1>VIRTUAL LAB<br>ELASTISITAS</h1>
+            <p>Laboratorium virtual fisika SMA untuk mempelajari tegangan, regangan, Modulus Young, dan Hukum Hooke.</p>
+            <ul>
+                <li>📚 Materi pembelajaran</li>
+                <li>🔬 Eksperimen virtual</li>
+                <li>📈 Grafik &amp; LKPD digital</li>
+                <li>✏️ Evaluasi pemahaman</li>
+            </ul>
+        </div>
+
+        <div class="login-form-wrap">
+            <h2>Masuk</h2>
+            <p>Isi identitasmu untuk memulai pembelajaran.</p>
+
+            <form id="loginForm" novalidate>
+
+                <div class="login-field">
+                    <label for="nama">Nama Lengkap</label>
+                    <input type="text" id="nama" maxlength="60" placeholder="Contoh: Andi Pratama" autocomplete="name" required>
+                </div>
+
+                <div class="login-field">
+                    <label for="kelas">Kelas</label>
+                    <select id="kelas" required>
+                        <option value="">Pilih kelas</option>
+                        <option>X</option>
+                        <option>XI IPA</option>
+                        <option>XI IPS</option>
+                        <option>XII IPA</option>
+                        <option>XII IPS</option>
+                        <option>Lainnya</option>
+                    </select>
+                </div>
+
+                <div class="login-field">
+                    <label for="absen">No. Absen / NIS <span style="font-weight:normal;color:#8795A5">(opsional)</span></label>
+                    <input type="text" id="absen" maxlength="20" inputmode="numeric" placeholder="Contoh: 12">
+                </div>
+
+                <div class="login-error" id="loginError" role="alert"></div>
+
+                <button type="submit" class="login-submit">Masuk ke Laboratorium →</button>
+            </form>
+
+            <p class="login-note">
+                Data identitas dan hasil belajar disimpan di perangkat ini (browser),
+                bukan di server.
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        (function () {
+            // Sudah masuk? langsung ke dashboard
+            if (window.VLAuth && VLAuth.getUser()) {
+                window.location.replace("index.html");
+                return;
+            }
+
+            const form = document.getElementById("loginForm");
+            const error = document.getElementById("loginError");
+
+            form.addEventListener("submit", e => {
+                e.preventDefault();
+
+                const name = document.getElementById("nama").value.trim().replace(/\s+/g, " ");
+                const kelas = document.getElementById("kelas").value;
+                const absen = document.getElementById("absen").value.trim();
+
+                if (name.length < 3) {
+                    error.textContent = "Nama lengkap minimal 3 karakter.";
+                    return;
+                }
+                if (!kelas) {
+                    error.textContent = "Silakan pilih kelas.";
+                    return;
+                }
+
+                try {
+                    localStorage.setItem(VLAuth.USER_KEY, JSON.stringify({
+                        name, kelas, absen, loginAt: new Date().toISOString()
+                    }));
+                } catch (err) {
+                    error.textContent = "Browser menolak penyimpanan. Nonaktifkan mode privat lalu coba lagi.";
+                    return;
+                }
+
+                window.location.href = "index.html";
+            });
+        })();
+    </script>
+</body>
+
+</html>

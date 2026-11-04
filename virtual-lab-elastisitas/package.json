@@ -1,0 +1,10 @@
+{
+  "name": "virtual-lab-elastisitas",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Laboratorium virtual fisika SMA: elastisitas dan Hukum Hooke",
+  "scripts": {
+    "dev": "npx serve public",
+    "deploy": "npx wrangler deploy"
+  }
+}
