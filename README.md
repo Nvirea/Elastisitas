@@ -1,2 +1,0 @@
-# Elastisitas
-Web pembelajaran sederhana
